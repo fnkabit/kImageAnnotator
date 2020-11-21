@@ -37,6 +37,8 @@ set(KIMAGEANNOTATOR_SRCS
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/AnnotationItemModifier.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/AnnotationItemResizer.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/AnnotationMultiItemResizer.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/AnnotationItemRotator.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/AnnotationMultiItemRotator.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/AnnotationItemSelector.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/AnnotationItemMover.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/AnnotationItemArranger.cpp
@@ -48,6 +50,14 @@ set(KIMAGEANNOTATOR_SRCS
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/resizeHandles/PointerRectResizeHandles.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/resizeHandles/ResizeHandle.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/resizeHandles/ResizeHandlesFactory.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/rotateHandles/AbstractItemRotateHandles.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/rotateHandles/AbstractRectRotateHandles.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/rotateHandles/LineRotateHandles.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/rotateHandles/RectRotateHandles.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/rotateHandles/PathRotateHandles.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/rotateHandles/PointerRectRotateHandles.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/rotateHandles/RotateHandle.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/annotations/modifiers/rotateHandles/RotateHandlesFactory.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/items/AbstractAnnotationItem.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/items/AbstractAnnotationLine.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/items/AbstractAnnotationObfuscate.cpp
@@ -81,6 +91,7 @@ set(KIMAGEANNOTATOR_SRCS
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/undo/DeleteCommand.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/undo/MoveCommand.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/undo/ResizeCommand.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/annotations/undo/RotateCommand.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/undo/ArrangeCommand.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/undo/CropCommand.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/annotations/undo/ScaleCommand.cpp

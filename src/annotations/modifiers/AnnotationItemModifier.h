@@ -26,6 +26,7 @@
 #include <QGraphicsSceneDragDropEvent>
 
 #include "AnnotationMultiItemResizer.h"
+#include "AnnotationMultiItemRotator.h"
 #include "AnnotationItemSelector.h"
 #include "AnnotationItemMover.h"
 
@@ -59,6 +60,7 @@ protected:
 
 private:
 	AnnotationMultiItemResizer *mItemResizer;
+	AnnotationMultiItemRotator *mItemRotator;
 	AnnotationItemSelector *mItemSelector;
 	AnnotationItemMover *mItemMover;
 
