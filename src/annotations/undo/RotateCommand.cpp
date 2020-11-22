@@ -18,14 +18,17 @@
  */
 
 #include "RotateCommand.h"
+#include <QtCore/QDebug>
+#include <QtMath>
+#include <QTransform>
 
 namespace kImageAnnotator {
 
-RotateCommand::RotateCommand(AbstractAnnotationItem *item, int handleIndex, QPointF newPos)
+RotateCommand::RotateCommand(AbstractAnnotationItem *item, int handleIndex, qreal angle)
 {
     mItem = item;
     mHandleIndex = handleIndex;
-    mNewPos = newPos;
+	mAngle = angle;
     mOriginalPos = item->pointAt(handleIndex);
 }
 
@@ -36,20 +39,28 @@ void RotateCommand::undo()
 
 void RotateCommand::redo()
 {
-    mItem->setPointAt(mNewPos, mHandleIndex);
+	mItem->rotate(mAngle);
+
+
+//	float angleRad = qAtan2(mNewPos.y() - mItem->rect().y(),
+//							mNewPos.x() - mItem->rect().x());
+//	float angle = angleRad * 180 / M_PI;
+//	qWarning() << "angle:\t" << angle;
+
+	// mItem->setPointAt(mNewPos, mHandleIndex);
 }
 
 bool RotateCommand::mergeWith(const QUndoCommand *command)
 {
-	const auto rotateCommand = dynamic_cast<const RotateCommand *>(command);
+//	const auto rotateCommand = dynamic_cast<const RotateCommand *>(command);
 
-	if (mItem != rotateCommand->mItem || mHandleIndex != rotateCommand->mHandleIndex) {
-        return false;
-    }
+//	if (mItem != rotateCommand->mItem || mHandleIndex != rotateCommand->mHandleIndex) {
+//        return false;
+//    }
 
-	mNewPos = rotateCommand->mNewPos;
+//	mNewPos = rotateCommand->mNewPos;
 
-    return true;
+//    return true;
 }
 
 int RotateCommand::id() const

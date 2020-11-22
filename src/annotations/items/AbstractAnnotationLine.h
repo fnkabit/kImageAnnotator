@@ -37,6 +37,7 @@ public:
 	void setPointAt(const QPointF &point, int index) override;
 	QPointF pointAt(int index) const override;
 	void scale(qreal sx, qreal sy) override;
+	void rotate(qreal angle) override;
 
 protected:
 	QLineF *mLine;

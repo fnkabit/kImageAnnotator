@@ -93,6 +93,11 @@ void AbstractAnnotationPath::scale(qreal sx, qreal sy)
 	updateShape();
 }
 
+void AbstractAnnotationPath::rotate(qreal angle)
+{
+
+}
+
 void AbstractAnnotationPath::scalePath(const QRectF &rect)
 {
 	scale(rect.width() / boundingRect().width(), rect.height() / boundingRect().height());

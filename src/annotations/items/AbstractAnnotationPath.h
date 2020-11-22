@@ -39,6 +39,7 @@ public:
 	QPointF pointAt(int index) const override;
 	void finish() override;
 	void scale(qreal sx, qreal sy) override;
+	void rotate(qreal angle) override;
 	PathPropertiesPtr pathProperties() const;
 
 protected:

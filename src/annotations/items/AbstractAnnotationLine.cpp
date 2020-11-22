@@ -90,6 +90,11 @@ void AbstractAnnotationLine::scale(qreal sx, qreal sy)
 	updateShape();
 }
 
+void AbstractAnnotationLine::rotate(qreal angle)
+{
+
+}
+
 void AbstractAnnotationLine::snapToAngle(bool enabled)
 {
 	if (enabled) {

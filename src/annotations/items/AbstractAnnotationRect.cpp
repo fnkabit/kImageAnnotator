@@ -18,12 +18,14 @@
  */
 
 #include "AbstractAnnotationRect.h"
+#include <QDebug>
 
 namespace kImageAnnotator {
 
 AbstractAnnotationRect::AbstractAnnotationRect(const QPointF &startPosition, const PropertiesPtr &properties) :
 	AbstractAnnotationItem(properties),
-	mRect(new QRectF())
+	mRect(new QRectF()),
+	mAngle(0)
 {
 	mRect->setTopLeft(startPosition);
 	mRect->setBottomRight(startPosition);
@@ -81,6 +83,43 @@ void AbstractAnnotationRect::scale(qreal sx, qreal sy)
 	auto scaledRect = transform.mapRect(*mRect);
 	mRect->setRect(scaledRect.x(), scaledRect.y(), scaledRect.width(), scaledRect.height());
 	updateShape();
+}
+
+void AbstractAnnotationRect::rotate(qreal angle)
+{
+	prepareGeometryChange();
+	mAngle = angle;
+	updateShape();
+
+
+//	qWarning() << "old: " << rect().x() << rect().y() << rect().width() << rect().height();
+
+
+
+//	QTransform t = QTransform().rotate(20);
+//	const auto newRect = t.mapRect(*mRect);
+//	qWarning() << "new topleft!: " << newRect.topLeft().x() << newRect.topLeft().y();
+//	qWarning() << "new topright: " <<  newRect.topRight().x() << newRect.topRight().y();
+
+//	prepareGeometryChange();
+//	mRect->setCoords(newRect.topLeft().x(), newRect.topLeft().y(),
+//					 newRect.bottomRight().x(), newRect.bottomRight().y());
+//	updateShape();
+
+	// qWarning() << "old rect:\t" << rect();
+	// prepareGeometryChange();
+	// QTransform t = QTransform().translate(rect().center().x(), rect().center().y()).rotate(angle);
+	// const auto rotatedRect = t.mapRect(*mRect);
+	// mRect->setRect(rotatedRect.x(), rotatedRect.y(), rotatedRect.width(), rotatedRect.height());
+	//	qWarning() << "rotated.x:\t" << rotatedRect.x();
+//	*mRect = rotatedRect;
+//	updateShape();
+
+//	const auto itemCenter = mItem->rect().center();
+//	QTransform t = QTransform().translate(itemCenter.x(), itemCenter.y()).rotate(mAngle);
+//	const auto rotated = t.mapRect(mItem->rect());
+//	qWarning() << "rotated:" << rotated;
+//	mItem->setPointAt(1, 0);
 }
 
 void AbstractAnnotationRect::makeSymmetric(bool enabled)

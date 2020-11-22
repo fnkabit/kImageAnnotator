@@ -18,6 +18,7 @@
  */
 
 #include "AnnotationRect.h"
+#include <QtCore/QDebug>
 
 namespace kImageAnnotator {
 
@@ -37,7 +38,14 @@ Tools AnnotationRect::toolType() const
 void AnnotationRect::updateShape()
 {
 	QPainterPath path;
-	path.addRect(*mRect);
+	if (mAngle == 0) {
+		path.addRect(*mRect);
+	} else {
+		QTransform t = QTransform().translate(mRect->center().x(), mRect->center().y()).rotate(mAngle).translate(-mRect->center().x(), -mRect->center().y());
+		const auto rotatedPolygon = t.mapToPolygon(mRect->toRect());
+		path.addPolygon(rotatedPolygon);
+	}
+
 	setShape(path);
 }
 

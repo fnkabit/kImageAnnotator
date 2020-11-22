@@ -34,7 +34,7 @@ public:
 		Id = 1236
     };
 
-	explicit RotateCommand(AbstractAnnotationItem *item, int handleIndex, QPointF newPos);
+	explicit RotateCommand(AbstractAnnotationItem *item, int handleIndex, qreal angle);
 	~RotateCommand() = default;
     virtual void undo() override;
     virtual void redo() override;
@@ -44,7 +44,7 @@ public:
 private:
     AbstractAnnotationItem *mItem;
     int mHandleIndex;
-    QPointF mNewPos;
+	qreal mAngle;
     QPointF mOriginalPos;
 };
 

@@ -49,6 +49,7 @@ public:
 	virtual PropertiesPtr properties() const;
 	virtual void finish();
 	virtual void scale(qreal sx, qreal sy) = 0;
+	virtual void rotate(qreal angle) = 0;
 	virtual Tools toolType() const = 0;
 	virtual void setProperties(const PropertiesPtr &properties);
 

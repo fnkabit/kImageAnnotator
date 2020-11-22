@@ -18,6 +18,7 @@
  */
 
 #include "AnnotationItemRotator.h"
+#include <QtDebug>
 
 namespace kImageAnnotator {
 
@@ -54,7 +55,17 @@ void AnnotationItemRotator::grabHandle(const QPointF &pos)
 void AnnotationItemRotator::moveHandle(const QPointF &pos)
 {
 	if (mCurrentHandle != -1) {
-		emit newCommand(new RotateCommand(mAnnotationItem, mCurrentHandle, pos - mClickOffset));
+//		qWarning() << "pos:\t"			<< pos;
+//		qWarning() << "handle pos:\t"	<< mRotateHandles->handle(mCurrentHandle).x() <<
+//										   mRotateHandles->handle(mCurrentHandle).y();
+//		qWarning() << "item.boundingRectCenter:\t" << mAnnotationItem->boundingRect().center();
+
+		QLineF line1(pos.toPoint(), mAnnotationItem->boundingRect().center().toPoint());
+		QLineF line2(QPoint(mRotateHandles->handle(mCurrentHandle).x(), mRotateHandles->handle(mCurrentHandle).y()),
+					mAnnotationItem->boundingRect().center().toPoint());
+		qWarning() << "angle:\t" << line1.angleTo(line2);
+
+		emit newCommand(new RotateCommand(mAnnotationItem, mCurrentHandle, line1.angleTo(line2)));
 	}
 }
 
