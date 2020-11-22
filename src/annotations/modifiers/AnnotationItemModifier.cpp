@@ -34,7 +34,7 @@ AnnotationItemModifier::AnnotationItemModifier(ZoomValueProvider *zoomValueProvi
 	setAcceptHoverEvents(true);
 
 	connect(mItemMover, &AnnotationItemMover::newCommand, this, &AnnotationItemModifier::itemChanged);
-	// connect(mItemResizer, &AnnotationMultiItemResizer::newCommand, this, &AnnotationItemModifier::itemChanged);
+	connect(mItemResizer, &AnnotationMultiItemResizer::newCommand, this, &AnnotationItemModifier::itemChanged);
 	connect(mItemRotator, &AnnotationMultiItemRotator::newCommand, this, &AnnotationItemModifier::itemChanged);
 }
 
@@ -48,11 +48,11 @@ AnnotationItemModifier::~AnnotationItemModifier()
 
 void AnnotationItemModifier::handleMousePress(const QPointF &pos, QList<AbstractAnnotationItem *> *items, bool isCtrlPressed)
 {
-//	mItemResizer->grabHandle(pos);
-//	if (mItemResizer->isResizing()) {
-//		mItemResizer->hideCurrentResizer();
-//		return;
-//	}
+	mItemResizer->grabHandle(pos);
+	if (mItemResizer->isResizing()) {
+		mItemResizer->hideCurrentResizer();
+		return;
+	}
 
 	mItemRotator->grabHandle(pos);
 	if (mItemRotator->isRotating()) {
@@ -68,7 +68,7 @@ void AnnotationItemModifier::handleMousePress(const QPointF &pos, QList<Abstract
 
 	auto selectedItems = mItemSelector->selectedItems();
 	mItemMover->setOffset(pos, selectedItems);
-//	mItemResizer->hide();
+	mItemResizer->hide();
 	mItemRotator->hide();
 
 	handleSelection();
@@ -77,10 +77,10 @@ void AnnotationItemModifier::handleMousePress(const QPointF &pos, QList<Abstract
 
 void AnnotationItemModifier::handleMouseMove(const QPointF &pos)
 {
-/*	if (mItemResizer->isResizing()) {
+	if (mItemResizer->isResizing()) {
 		mItemResizer->moveHandle(pos);
 		updateCursor(mItemResizer->cursorForCurrentHandle());
-	} else */if (mItemRotator->isRotating()) {
+	} else if (mItemRotator->isRotating()) {
 		mItemRotator->moveHandle(pos);
 		updateCursor(mItemRotator->cursorForCurrentHandle());
 	} else if (mItemSelector->isSelecting()) {
@@ -93,17 +93,17 @@ void AnnotationItemModifier::handleMouseMove(const QPointF &pos)
 
 void AnnotationItemModifier::handleMouseRelease(QList<AbstractAnnotationItem *> *items)
 {
-/*	if (mItemResizer->isResizing()) {
+	if (mItemResizer->isResizing()) {
 		mItemResizer->releaseHandle();
 		mItemResizer->showCurrentResizer();
-	} else */if (mItemRotator->isRotating()) {
+	} else if (mItemRotator->isRotating()) {
 		mItemRotator->releaseHandle();
 		mItemRotator->showCurrentRotator();
 	} else if (mItemSelector->isSelecting()) {
 		mItemSelector->finishSelectionRectWhenShown(items);
 	} else {
 		mItemMover->clearOffset();
-//		mItemResizer->show();
+		mItemResizer->show();
 		mItemRotator->show();
 		updateCursor(mItemMover->cursor());
 	}
@@ -133,15 +133,15 @@ QRectF AnnotationItemModifier::boundingRect() const
 void AnnotationItemModifier::clear()
 {
 	mItemSelector->clearSelection();
-	// mItemResizer->detach();
+	mItemResizer->detach();
 	mItemRotator->detach();
 }
 
 void AnnotationItemModifier::updateSelection()
 {
 	mItemSelector->update();
-	// mItemResizer->update();
-	// mItemResizer->refresh();
+	mItemResizer->update();
+	mItemResizer->refresh();
 	mItemRotator->update();
 	mItemRotator->refresh();
 }
@@ -169,7 +169,7 @@ void AnnotationItemModifier::handleSelection()
 	if (count == 0) {
 		clear();
 	} else {
-		// mItemResizer->attachTo(selectedItems);
+		mItemResizer->attachTo(selectedItems);
 		mItemRotator->attachTo(selectedItems);
 		emit itemsSelected(selectedItems);
 	}
